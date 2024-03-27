@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cliente Websocket</title>
+</head>
+<body>
+  <h1>Cliente Websocket</h1>
+
+  <form id="create-house-form">
+    <label for="address">Dirección:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="city">Ciudad:</label>
+    <input type="text" id="city" name="city" required>
+
+    <!-- Otros campos del formulario -->
+
+    <button type="submit">Crear Casa</button>
+  </form>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    const socket = io('http://localhost:3000');
+
+    const createHouseForm = document.getElementById('create-house-form');
+    createHouseForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const houseData = {
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        // Otros campos del formulario
+      };
+
+      socket.emit('createHouse', houseData);
+    });
+
+    socket.on('createHouse', (createdHouse) => {
+      console.log('Casa creada:', createdHouse);
+      // Actualiza la interfaz de usuario con la casa creada
+    });
+  </script>
+</body>
+</html>

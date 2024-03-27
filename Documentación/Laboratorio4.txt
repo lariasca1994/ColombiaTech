@@ -1,0 +1,10 @@
+Implementar las pruebas Unitarias para la entidad Houses
+
+
+- Testear cuando los datos esten OK
+- Cuando los datos esten incompletos
+
+- Creacion de casas
+- Obtener una casa
+- Actualizar una casa
+- Eliminar una Casa

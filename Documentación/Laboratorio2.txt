@@ -1,0 +1,17 @@
+Implementar las consultas GraphQL para el modelos de casas
+que me permita Traer todas las casas, consultar una casa por ID y obtener informacion de una casa a partir de un filtro
+
+House {
+  id: ID!
+  address: String!
+  city: String!
+  state: String!
+  size: Int!
+  type: String!
+  zip_code: String!
+  code: String!
+  rooms: Int!
+  bathrooms: Int!
+  price: Int!
+  image: String!
+}

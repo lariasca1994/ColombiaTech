@@ -1,0 +1,17 @@
+Laboratorio 1:
+Implementar los servicios web para el CRUD del modelo Casas
+
+House {
+  id: ID!
+  address: String!
+  city: String!
+  state: String!
+  size: Int!
+  type: String!
+  zip_code: String!
+  code: String!
+  rooms: Int!
+  bathrooms: Int!
+  price: Int!
+  image: String!
+}
