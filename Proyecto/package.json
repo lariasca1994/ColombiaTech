@@ -15,5 +15,10 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "type-graphql": "^1.1.1"
+    "scripts": 
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "eject": "react-scripts eject"
+    
   }
 }
