@@ -1,0 +1,2 @@
+Implementar la logica desde el frontend para Crear, Listar, Actualizar y Eliminar Casas
+Usando React con Redux y RTK Query
