@@ -1,5 +1,5 @@
 {
-  "name": "talento-tech-nest",
+  "name": "nest-tech",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -22,7 +22,6 @@
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
-    "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^10.0.4",
     "@nestjs/platform-express": "^10.0.0",
     "bcryptjs": "^2.4.3",

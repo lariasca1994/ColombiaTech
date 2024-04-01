@@ -1,7 +1,7 @@
-const fs = require('fs'); // Importamus librariam FileSystem
+const fs=require('fs')
 
-// Contentum archivi
-const content = [
+const content = 
+[
     {
         "userId": 1,
         "id": 1,
@@ -22,13 +22,26 @@ const content = [
     }
 ]
 
-let contentString = JSON.stringify(content, null, 2); // Addere indentationem pro meliore lectione
+let contentString = JSON.stringify(content)
 
-// Creare archivum in radice projecti
+// Crear un archivo en la ruta raiz del proyecto
 fs.writeFile('archivo.json', contentString, (err) => {
-    if (err) {
-        console.error('Error in creando archivum:', err);
+    if(err){
+        console.log(err);
         return;
     }
-    console.log("Archivum creatum est prospere");
-});
+    console.log("El archivo fue creado exitosamente")
+})
+router.post('/department', (req, res) => {
+    fs.readFile('department.json', 'utf8', (err, data) => {
+        var departments = JSON.parse(data)
+        departments.push(req.body)     
+        fs.writeFile('department.json', JSON.stringify(departments), (err) => {
+            if(err){
+                res.send(err)
+                return;
+            }
+            res.send(req.body)
+        })   
+    })
+})

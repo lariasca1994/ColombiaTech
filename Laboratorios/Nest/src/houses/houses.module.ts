@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common';
 import { HousesService } from './houses.service';
 import { HousesController } from './houses.controller';
-
-// Importamos los módulos necesarios para la persistencia de datos
-// Por ejemplo, si usamos TypeORM con una base de datos PostgreSQL
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { House } from './entities/house.entity';
+import { MongooseModule } from '@nestjs/mongoose';
+import { HouseSchema } from './house.schema';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([House]), // Registramos la entidad House
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'House', schema: HouseSchema }])],
   providers: [HousesService],
-  controllers: [HousesController],
+  controllers: [HousesController]
 })
 export class HousesModule {}

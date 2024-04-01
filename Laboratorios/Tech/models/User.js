@@ -9,14 +9,7 @@ const UserSchema = new mongoose.Schema({
     },
     name: {
         type: String, 
-        required: true,
-        validate: {
-            validator: function(name) {
-              // Expresión regular para validar el formato del correo electrónico              
-              return /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/.test(name);
-            },
-            message: props => `${props.value} no es un nombre válido!`
-          }
+        required: true
     },
     lastname: {
         type: String, 
@@ -24,12 +17,12 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String, 
-        required: true,
         unique: true,
+        required: true,
         validate: {
-            validator: function(email) {
-              // Expresión regular para validar el formato del correo electrónico              
-              return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            validator: function(v) {
+              // Expresión regular para validar el formato del correo electrónico
+              return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); //EXPRESIÓN REGULAR
             },
             message: props => `${props.value} no es un correo electrónico válido!`
           }
@@ -38,8 +31,8 @@ const UserSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
-    avatar: {
-      type: String
+    avatar:{
+        type: String,
     }
 })
 

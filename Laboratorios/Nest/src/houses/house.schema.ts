@@ -1,7 +1,6 @@
-const mongoose = require('mongoose') // Importando la libreria
-
+import * as mongoose from "mongoose";
 // Creando el modelo de users
-const HouseSchema = new mongoose.Schema({
+export const HouseSchema = new mongoose.Schema({
 
     address: {
         type: String,
@@ -62,4 +61,3 @@ image: {
        
     },
 });
-module.exports = mongoose.model('house', HouseSchema) 

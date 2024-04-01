@@ -1,23 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-@Entity()
 export class House {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  address: string;
-
-  @Column()
-  rooms: number;
-
-  @Column({ nullable: true })
-  bathrooms?: number;
-
-  @Column({ nullable: true })
-  squareMeters?: number;
-
-  @Column({ nullable: true })
-  price?: number;
-
+  address: String;
+  city: String;
+  state: String;
+  size: Number;
+  type: String;
+  zip_code: String;
+  rooms: Number;
+  bathrooms: Number;
+  parking: String;
+  price: Number;
+  code: String;
+  image: String;
 }

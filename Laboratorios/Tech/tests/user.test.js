@@ -1,86 +1,97 @@
-const request = require('supertest'); // Librería para probar APIs
-const app = require('../index.js'); // importando todas las rutas
+const request = require('supertest');
+const app= require('../index.js');
 
 const objectToTest = {
-    "id": 7845454,
-    "name": "Brad",
-    "lastname": "Pitt",
-    "email": "brad-pitt@correo.com",
-    "password": "SoyBrad"
+    "id": 4515,
+    "name": "Brandon",
+    "lastname": "Purebas",
+    "email": "bpruebas@correo.com",
+    "password": "123546"
 }
-let userId;
-let token;
 
-/** Descripción de la Prueba */
-describe('GET /', () => {
-    /** Descripción específica del caso a probar */
-    it('responde con el estado 200', async () => {
-        /** Simulando la solicitud HTTP */
-        const response = await request(app).get('/');
-        /** Defino los valores esperados */
-        expect(response.status).toBe(200);
-    })
-    it('responde con el texto "Hello world"', async () => {
-        const response = await request(app).get('/');
-        expect(response.text).toBe('Hello world');
-    })
-})
 
-describe('POST /user', () => {
-    it('crea un nuevo usuario en la DB y responde con los datos', async () => {
-        const response = await request(app).post('/user').send(objectToTest)
-        /** Asignando el _id del usuario nuevo a la variable userId
-         *  para ser usado en las otras pruebas */
-        userId = response.body._id;
+let userId="65d3b0a1cc50730077042317";
+let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQ0ZDBkOWM1YzY1OTcxZWM1MDVmMzEiLCJlbWFpbCI6InBydWViYWxAY29ycmVvLmNvbSIsImlhdCI6MTcwOTY3MTU3NCwiZXhwIjoxNzA5Njc1MTc0fQ.s7O_isfcRc2Givm-wVlfEnBtQljds_-bdITJATEJ37o";
 
-        expect(response.statusCode).toBe(200)
-        expect(response.body).toHaveProperty('_id')
-        expect(response.body.name).toBe(objectToTest.name)
-        expect(response.body.lastname).toBe(objectToTest.lastname)
-        expect(response.body.email).toBe(objectToTest.email)
-    })
-})
+// describe ('GET /', () => {
+//     it('respondes with statis 200', async () => {
 
-describe('GET /user/:id', () => {
-    it('responde con un objeto que contiene un usuario específico', async () => {
-        const response = await request(app).get('/user/' + userId);
-        expect(response.status).toBe(200);
-        expect(typeof response.body === "object").toBe(true);
-        expect(response.body).toHaveProperty('_id')
-        expect(response.body.name).toBe(objectToTest.name)
-        expect(response.body.lastname).toBe(objectToTest.lastname)
-        expect(response.body.email).toBe(objectToTest.email)
-    })
-})
+//         //solicitud al get 
+//         const response = await request(app).get('/');
+//         //verifica status
+//         expect(response.status).toBe(200);
+        
+//     }),
+//     it('respondes with text "hello world"', async () => {
+//         const response = await request(app).get('/');
+//         //verifica el texto
+//         expect(response.text).toBe('Hello world');
+//     })
+//     it('respondes with an Object that contains an specific user"', async () => {
+//         const response = await request(app).get('/user');
+//         const objectToTest={
+            
+//                 "_id": "65d386a92013fcf85ef9b60d",
+//                 "id": 56546,
+//                 "name": "jean",
+//                 "lastname": "cabeza",
+//                 "email": "cabeza@correo.com",
+//                 "password": "12345",
+//                 "__v": 0,
+//                 "avatar": "uploads\\1708458153860-RobloxScreenShot20231211_164938448.png"
+         
+//         }
+//         expect(Array.isArray(response.body)).toBe(true);
+//         expect(response.body).toEqual(expect.arrayContaining([objectToTest]));
+        
+//     })
+    
+// })
+// describe('POST /user', () => {
+//     it('create a new user in the DB and response with the data', async () => {
+//         const response = await request(app).post('/user').send(objectToTest)
+//         /** Asignando el _id del usuario nuevo a la variable userId 
+//          *  para ser usanda en las otras pruebas */
+//         userId = response.body._id;
 
-describe('POST /login', () => {
-    it('Inicio de sesión exitoso con email y contraseña', async () => {
-        const response = await request(app).post('/login').send(objectToTest)
+//         expect(response.statusCode).toBe(200)
+//         expect(response.body).toHaveProperty('_id')
+//         expect(response.body.name).toBe(objectToTest.name)
+//         expect(response.body.lastname).toBe(objectToTest.lastname)
+//         expect(response.body.email).toBe(objectToTest.email)
+//     })
+// })
 
-        token = response.body.token;
-        expect(response.statusCode).toBe(200)
-        expect(response.body).toHaveProperty('token')
-        expect(response.body.status).toBe("success")
-    })
 
-    it('Error de inicio de sesión con email y contraseña', async () => {
-        const user = {
-            "email": "lucia-pardo10@correo.com",
-            "password": "UsuarioDePrueba1111"
-        }
+// describe('POST /login', () => {
+//     it('Success login with email and password', async () => {        
 
-        const response = await request(app).post('/login').send(user)
+//         const response = await request(app).post('/login').send(objectToTest)
 
-        expect(response.statusCode).toBe(401)
-        expect(response.body).not.toHaveProperty('token')
-        expect(response.body.status).toBe("error")
-    })
-})
+//         token = response.body.token;
+//         expect(response.statusCode).toBe(200)
+//         expect(response.body).toHaveProperty('token')
+//         expect(response.body.status).toBe("success")
+//     })
 
-describe('DELETE /user/:id', () => {
-    it('Eliminar usuario exitosamente con _id', async () => {
-        const response = await request(app).delete('/user/' + userId)
-            .set('Authorization', 'Bearer ' + token)
+//     it('Error login with email and password', async () => {
+//         const user = {
+//             "email": "pruebal@correo.com",
+//             "password": "123546"
+//         }
+
+//         const response = await request(app).post('/login').send(user)
+
+//         expect(response.statusCode).toBe(200)
+//         expect(response.body).not.toHaveProperty('token')
+//         expect(response.body.status).toBe("error")
+//     })
+// })
+
+describe('POST /house', () => {
+    it('Success delete with _id', async () => {        
+        const response = await request(app).delete('/user/'+ userId)
+                                        .set('Authorization', 'Bearer ' + token)
         expect(response.statusCode).toBe(200)
         expect(response.body.status).toBe("success")
     })

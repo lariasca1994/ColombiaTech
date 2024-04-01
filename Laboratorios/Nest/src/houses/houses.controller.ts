@@ -1,34 +1,51 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { House } from './house.entity';
+import { CreateHouseDto } from './dto/create.house.dto';
 import { HousesService } from './houses.service';
-import { CreateHouseDto } from './dto/create-house.dto';
-import { UpdateHouseDto } from './dto/update-house.dto';
 
-@Controller('houses')
+@Controller('house')
 export class HousesController {
-  constructor(private readonly housesService: HousesService) {}
+
+
+  constructor(private readonly HousesService: HousesService) {}
+
+
+
+  @Post()
+  @HttpCode(201)
+  async create(@Body() CreateHouseDto: CreateHouseDto): Promise<House> {
+    return this.HousesService.create(CreateHouseDto);
+  }
 
   @Get()
-  getAllHouses() {
-    return this.housesService.getAllHouses();
+  async findAll(): Promise<House[]> {
+    return this.HousesService.findAll();
   }
 
   @Get(':id')
-  getHouseById(@Param('id') id: string) {
-    return this.housesService.getHouseById(+id);
+  async findOne(@Param('id') id: string): Promise<House> {
+    return this.HousesService.findOne(id);
   }
+  
+@Put(':id')
+async update(
+  @Param('id')id: string,
+  @Body() updateHouse: CreateHouseDto,):
+  Promise<House> {
+  return this.HousesService.update(id,updateHouse);
+}
 
-  @Post()
-  createHouse(@Body() createHouseDto: CreateHouseDto) {
-    return this.housesService.createHouse(createHouseDto);
-  }
-
-  @Put(':id')
-  updateHouse(@Param('id') id: string, @Body() updateHouseDto: UpdateHouseDto) {
-    return this.housesService.updateHouse(+id, updateHouseDto);
-  }
-
-  @Delete(':id')
-  deleteHouse(@Param('id') id: string) {
-    return this.housesService.deleteHouse(+id);
+@Delete (':id')
+async delete(@Param('id')id: string): Promise<boolean> {
+    return this.HousesService.delete(id);
   }
 }
