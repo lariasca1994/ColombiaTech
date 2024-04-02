@@ -13,3 +13,17 @@ https://app.egg.live/content/step/46lRqptfwbPDv1rJz5D95V
 https://youtube.com/playlist?list=PLViOgmEjbMSEQUIwgbUyTX-plqgWD-mZA&si=5ArtKRB9J50AFtql
 
 cognitiveclass.ai
+
+https://www.coursera.org/learn/python-statistics-financial-analysis
+https://www.coursera.org/learn/mathematical-thinking
+https://www.coursera.org/learn/python-for-applied-data-science-ai
+https://www.coursera.org/learn/cybersecurity-for-everyone
+https://www.coursera.org/learn/html-css-javascript-for-web-developers
+
+① adventjs․dev
+② leetcode․com
+③ codewars․com
+④ exercism․org
+⑤ coderbyte․com
+⑥ codesignal․com
+⑦ hackerrank․com

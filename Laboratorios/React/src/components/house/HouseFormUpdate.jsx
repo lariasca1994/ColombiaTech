@@ -1,18 +1,20 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { useState } from 'react';
-import { useCreateHouseMutation } from '../../features/api/apiHousesSlice';
+import { useUpdateHouseMutation, useGetHouseByCodeQuery } from '../../features/api/apiHousesSlice';
 import HouseForm from './HouseForm';
 
-export default function HouseFormCreate() {
+export default function HouseFormUpdate() {
     const navigate = useNavigate();
-    const [createHouse] = useCreateHouseMutation()
-    
+    const { code } = useParams();
+    const [updateHouse] = useUpdateHouseMutation();
+    const { data: house, isLoading, isError, error } = useGetHouseByCodeQuery(code);
+
     const [file, setFile] = useState(null);
-  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newHouse = {
+        const updatedHouse = {
             code: e.target.code.value,
             address: e.target.address.value,
             department: e.target.department.value.split("-")[1],
@@ -21,12 +23,12 @@ export default function HouseFormCreate() {
             numRooms: e.target.numRooms.value
         }
         try {
-            const response = await createHouse(newHouse)
+            const response = await updateHouse({ code, updatedHouse });
             if (response.data.status === "error") {
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: "La casa no pudo ser registrada, por favor verifique los datos",
+                    title: "La casa no pudo ser actualizada, por favor verifique los datos",
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -39,7 +41,7 @@ export default function HouseFormCreate() {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Casa creada correctamente",
+                    title: "Casa actualizada correctamente",
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
@@ -51,11 +53,16 @@ export default function HouseFormCreate() {
         }
     }
 
+    if (isLoading) return <div role="status" className='flex justify-center'>
+        {/* ... */}
+    </div>;
+    else if (isError) return (<div>Error: {error.message} </div>)
+
     return (
         <HouseForm props={{
             handleSubmit: handleSubmit,
             handleChangeAvatar: null,
-            house: null
+            house: house
         }} />
     );
-}
+}   
