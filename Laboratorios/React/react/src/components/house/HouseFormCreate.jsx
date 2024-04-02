@@ -1,37 +1,30 @@
 import { useNavigate } from 'react-router-dom'
-import { useCreateUserMutation, useUploadAvatarMutation } from '../../features/api/apiSlice';
 import Swal from 'sweetalert2'
-import UserForm from './UserForm';
 import { useState } from 'react';
+import { useCreateHouseMutation } from '../../features/api/apiHousesSlice';
+import HouseForm from './HouseForm';
 
-export default function UserFormCreate(){
+export default function HouseFormCreate(){
 
     const navigate = useNavigate(); // Instanciamos la vaiable de useNavigate
-    const [createUser] = useCreateUserMutation()
+    const [createHouse] = useCreateHouseMutation()
     
     const [file, setFile] = useState(null);
-    const [uploadAvatar] = useUploadAvatarMutation();
-
-    const handleChangeAvatar = (e) => {
-        setFile(e.target.files)
-    }
   
     const handleSubmit = async (e) => {
         e.preventDefault();        
-        const newUser = {
-            name: e.target.name.value,
-            lastname: e.target.lastname.value,
-            email: e.target.email.value,
-            id: e.target.id.value,
-            password: e.target.password.value,
+        const newHouse = {
+            address: e.target.address.value,
+            department: e.target.department.value.split("-")[1],
+            city: e.target.city.value,
         }
         try {
-            const response = await createUser(newUser)          
+            const response = await createHouse(newHouse)          
             if(response.data.status == "error"){
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: "El usuario no pudo ser registrado, por favor verifique los datos",
+                    title: "La casa no pudo ser registrado, por favor verifique los datos",
                     showConfirmButton: false,
                     timer: 1500
                   })
@@ -39,7 +32,7 @@ export default function UserFormCreate(){
                 if(file){
                     const formData = new FormData();
                     formData.append("file", file[0])
-                    uploadAvatar({_id: response.data._id, file: formData})
+                    // uploadAvatar({_id: response.data._id, file: formData})
                 }
                 Swal.fire({
                     position: "top-end",
@@ -58,8 +51,8 @@ export default function UserFormCreate(){
     }
 
     return (
-        <UserForm props={{handleSubmit: handleSubmit, 
-                        handleChangeAvatar: handleChangeAvatar, 
+        <HouseForm props={{handleSubmit: handleSubmit, 
+                        handleChangeAvatar: null, 
                         user:null}} />
     );
 }

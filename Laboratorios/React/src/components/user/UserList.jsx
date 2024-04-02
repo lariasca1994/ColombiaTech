@@ -1,147 +1,100 @@
+import { decreaseNumber, increaseNumber } from "../features/numberSlice";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Link } from "react-router-dom";
-import { useRemoveUserMutation, useGetUsersQuery } from "../../features/api/apiSlice";
-import Swal from "sweetalert2";
-export default function UserList() {
-  /*Obtiene el estado de una variable con Redux
-  const users = useSelector((state) => state.users);
-  */
- const { data: users, isLoading, isError, error} = useGetUsersQuery();
- const [deleteUser] = useRemoveUserMutation();
- const handleDelete = (user) => {
-  // console.log(user);
-  Swal.fire({
-    title: `¿Estás seguro de que deseas eliminar al usuario ${user.name} ${user.lastname}`,
-    text: "¡Esta acción no se puede revertir!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Estoy seguro"
-  }).then((result) => {
-    if (result.isConfirmed) {
-        deleteUser(user._id);
-      }
-    });
- }
+function Profile({user}) {  
 
- if (isLoading) return <div role="status" className='flex justify-center py-5'>
- <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
- </svg>
- <span className="sr-only">Loading...</span>
-</div>;
- else if(isError) return (<div>Error: {error.message} </div>)
+    return (
+      <>
+        <h1>{user.name}</h1>
+        <br />
+        <img
+          className="avatar"
+          src={user.imageUrl}
+          alt={'Photo of ' + user.name}
+          style={{
+            width: user.imageSize,
+            height: user.imageSize,
+            backgroundColor: 'black'
+          }}
+        />      
+      </>
+    );
+}
 
-//  const users = data;
+function ButtonExample(){
+
+  /** El setState se usa para cambiar estados de variables */
+  // const [count, setCount] = useState(0);
+
+  /** Obtiene el valor del estado de la variable */
+  const number = useSelector(state => state.number.value);
+  /** Cambiar el valor del estado de la variable */
+  const dispatch = useDispatch();
+
+
   return (
     <>
-      <div className="overflow-x-auto flex-justify-center px-5 py-5">
-        <table className="table-auto divide-y border border-black w-full">
-          <thead>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              Name
-            </th>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              LastName
-            </th>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              Email
-            </th>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              Identification
-            </th>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              Avatar
-            </th>
-            <th className="px-6 py-3 bg-gray-400 text-center border border-black">
-              Actions
-            </th>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr className="hover:bg-border indigo-800" key={user._id}>
-                <td className="px-6 py-3 bg-gray-200 text-center border border-black">
-                  {user.name}
-                </td>
-                <td className="px-6 py-3 bg-gray-200 text-center border border-black">
-                  {user.lastname}
-                </td>
-                <td className="px-6 py-3 bg-gray-200 text-center border border-black">
-                  {user.email}
-                </td>
-                <td className="px-6 py-3 bg-gray-200 text-center border border-black">
-                  {user.userId}
-                </td>
-                <td className="px-6 py-3 bg-gray-200 text-center border border-black">
-                  <img
-                    style={{
-                      width: 50,
-                      height: 50,
-                    }}
-                    src={`http://localhost:9090/${user.avatar}`}
-                    alt="User's avatar"
-                    className="mx-auto transition-transform duration-150 transform hover:scale-110"
-                  />
-                </td>
-                <td className="py-3 bg-gray-200 text-center border border-black">
-                  <div className="inline-flex rounded-md" role="group">
-                    {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px- rounded-full w-20">
-                      <Link to={`/user/${user._id}`}>Edit</Link>
-                    </button> */}
-                    <Link
-                      to={`/user/${user._id}`}
-                      className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center hover:shadow-lg hover:shadow-blue-800/50"
-                    >
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                          />
-                        </svg>
-                      </span>
-                      <span className="hidden md:inline-block">Edit</span>
-                    </Link>
-                    <button onClick={() => {
-                      handleDelete(user)
-                    }}
-                    type="button"
-                    className="text-slate-800 hover:text-red-500 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center hover:shadow-lg hover:shadow-red-500/20">
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                          />
-                        </svg>
-                      </span>
-                      <span className="hidden md:inline-block">Delete</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <button className="bg-blue-500 hover:bg-blue-700 rounded
+                         text-blue-50 font-bold py-2 px-4" 
+              onClick={() => dispatch(increaseNumber())}>Sumar</button>
+      <button className="bg-red-500 hover:bg-red-700 rounded
+                         text-red-50 font-bold py-2 px-4" 
+              onClick={() => dispatch(decreaseNumber())}>Restar</button>
+      <p> El contador va en: {number}</p>
     </>
   );
 }
+
+export default function Example() {
+
+    const saludar = () => {
+      alert("hola")
+    }
+  
+    const mostrarTexto = (e) => {
+      console.log(e.target.value)
+    }
+  
+    const keyUp = () => {
+      console.log("Solo una tecla")
+    }
+  
+    /** Cambiando el estado de las variables */
+  
+    const users = [{
+      name: 'Elvis Presley',
+      imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/singer-elvis-presley-news-photo-1590531497.jpg',
+      imageSize: 90,
+    }, 
+    {
+      name: 'Brad Pitt',
+      imageUrl: 'https://goldenglobes.com/wp-content/uploads/2023/10/brad-pitt_03_paramount-pictures.jpg',
+      imageSize: 90,
+    }, 
+    {
+      name: 'Madonna',
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVATslgVY87n3lp3XHUlxF8Edc6jubIVkmbg&usqp=CAU',
+      imageSize: 90,
+    },
+    {
+      name: 'Zinedine Zidane',
+      imageUrl: 'https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--c477d5d0-4f24-486c-9984-5f07beef79fd/_330186270595.app.png?preferwebp=true&width=312',
+      imageSize: 90,
+    }];
+  
+    return (
+      <div>
+        {users.map(user => (
+          <Profile key={user.name} user={user}/>
+        ))}
+        <br/>
+        <button onClick={() => saludar()}>Enviar</button>    
+        <input type="text" onChange={mostrarTexto} onKeyUp={keyUp} />  
+        <br/>
+        <ButtonExample/>
+        <ButtonExample/>
+        <ButtonExample/>
+        
+      </div>
+    )
+  }
