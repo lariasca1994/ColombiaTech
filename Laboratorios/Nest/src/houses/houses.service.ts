@@ -49,6 +49,4 @@ export class HousesService {
             throw new NotFoundException('house Not found');
           }
         }
-    
-     
 }
