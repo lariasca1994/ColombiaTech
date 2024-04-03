@@ -27,3 +27,9 @@ https://www.coursera.org/learn/html-css-javascript-for-web-developers
 ⑤ coderbyte․com
 ⑥ codesignal․com
 ⑦ hackerrank․com
+
+git init
+git add .
+git commit -m "first commit"
+git add remote [poner url de su repo]
+git push -u origin master
