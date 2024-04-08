@@ -7,17 +7,19 @@ import { useState } from 'react';
 export default function UserFormCreate(){
 
     const navigate = useNavigate(); // Instanciamos la vaiable de useNavigate
-    const [createUser] = useCreateUserMutation()
-    
     const [file, setFile] = useState(null);
+    const [createUser] = useCreateUserMutation()
     const [uploadAvatar] = useUploadAvatarMutation();
 
-    const handleChangeAvatar = (e) => {
+    const handleChangeAvatar = (e)=> {
         setFile(e.target.files)
     }
-  
+
+
+
+
     const handleSubmit = async (e) => {
-        e.preventDefault();        
+        e.preventDefault();
         const newUser = {
             name: e.target.name.value,
             lastname: e.target.lastname.value,
@@ -26,7 +28,7 @@ export default function UserFormCreate(){
             password: e.target.password.value,
         }
         try {
-            const response = await createUser(newUser)          
+            const response = await createUser(newUser)
             if(response.data.status == "error"){
                 Swal.fire({
                     position: "top-end",
@@ -35,11 +37,12 @@ export default function UserFormCreate(){
                     showConfirmButton: false,
                     timer: 1500
                   })
-            }else{
+            }else{   
+                
                 if(file){
-                    const formData = new FormData();
-                    formData.append("file", file[0])
-                    uploadAvatar({_id: response.data._id, file: formData})
+                 const formData = new FormData();
+                 formData.append("file", file[0]) 
+                 uploadAvatar({_id: response.data._id, file: formData})
                 }
                 Swal.fire({
                     position: "top-end",
@@ -58,8 +61,6 @@ export default function UserFormCreate(){
     }
 
     return (
-        <UserForm props={{handleSubmit: handleSubmit, 
-                        handleChangeAvatar: handleChangeAvatar, 
-                        user:null}} />
+        <UserForm props={{ handleChangeAvatar:handleChangeAvatar,   handleSubmit: handleSubmit, user:null}} />
     );
 }

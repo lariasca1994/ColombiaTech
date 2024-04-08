@@ -4,34 +4,46 @@ import { useState } from 'react';
 import { useCreateHouseMutation } from '../../features/api/apiHousesSlice';
 import HouseForm from './HouseForm';
 
-export default function HouseFormCreate() {
-    const navigate = useNavigate();
+export default function HouseFormCreate(){
+
+    const navigate = useNavigate(); // Instanciamos la vaiable de useNavigate
     const [createHouse] = useCreateHouseMutation()
     
     const [file, setFile] = useState(null);
   
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const newHouse = {
-            code: e.target.code.value,
-            address: e.target.address.value,
-            department: e.target.department.value.split("-")[1],
-            city: e.target.city.value,
-            price: e.target.price.value,
-            numRooms: e.target.numRooms.value
+        e.preventDefault();     
+        
+        if (!e || !e.target) {
+            console.error("Evento o e.target es nulo o indefinido.");
+            return;
         }
+
+        const newHouse = {
+            address: e.target.address.value,
+            state: e.target.state.value.split("-")[1],
+            city: e.target.city.value,
+            size: e.target.size.value,
+            type: e.target.type.value,
+            price: e.target.price.value,
+            code: e.target.code.value,
+
+        
+        }
+        
         try {
-            const response = await createHouse(newHouse)
-            if (response.data.status === "error") {
+            const response = await createHouse(newHouse)    
+            console.log(response)      
+            if(response.data.status == "error"){
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: "La casa no pudo ser registrada, por favor verifique los datos",
+                    title: "La casa no pudo ser registrado, por favor verifique los datos",
                     showConfirmButton: false,
                     timer: 1500
-                })
-            } else {
-                if (file) {
+                  })
+            }else{
+                if(file){
                     const formData = new FormData();
                     formData.append("file", file[0])
                     // uploadAvatar({_id: response.data._id, file: formData})
@@ -39,23 +51,22 @@ export default function HouseFormCreate() {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Casa creada correctamente",
+                    title: "Casa Creada Correctamente",
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate('/houses') // Hacemos la redirección
+                    navigate('/house') // Hacemos la redireccion
                 });
             }
         } catch (error) {
             console.log(error)
         }
+        
     }
 
     return (
-        <HouseForm props={{
-            handleSubmit: handleSubmit,
-            handleChangeAvatar: null,
-            house: null
-        }} />
+        <HouseForm props={{handleSubmit: handleSubmit, 
+                        handleChangeAvatar: null, 
+                        house:null}} />
     );
 }

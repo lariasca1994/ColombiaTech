@@ -1,96 +1,94 @@
 const express = require('express');
-const router = express.Router();
-const multer = require('multer');
-const houseSchema = require('../models/house')
+ const router = express.Router();
+ const HouseSchema = require ('../models/House');
+ const multer = require ('multer');
+ const cors = require('cors');
 
-router.get('/house', async (req, res) => {
-    //Traer todos los usuarios
-    let house= await houseSchema.find(); 
-    res.json(house)
-});
+ const app = express();
 
-router.get('/house/:id', async (req, res) => {
-    //Traer un usuario especifico pasando el ID
-    var id = req.params.id
-    let house = await houseSchema.findById(id); 
-    // console.log(user)
-    res.json(house)
-});
+// Agrega el middleware de CORS para permitir solicitudes desde cualquier origen
+app.use(cors());
 
+ router.get('/house', async (req, res)=>{
+ //traer todas las casas
+ let houses = await HouseSchema.find();
+ res.json(houses)
+ 
+ })
 
-
-router.post('/house', async (req, res) => {
-    //Crear una casa
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    let house = houseSchema({
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        size: req.body.size,
-        type: req.body.type,
-        zip_code: req.body.zip_code,
-        rooms: req.body.rooms,
-        bathrooms: req.body.bathrooms,
-        parking: req.body.parking,
-        price: req.body.price,
-        code: req.body.code,
-        //image: req.body.image
-    })
-
-    house.save().then((result) => {
-        res.send(result)
-    }).catch((err) => {
-        if(err.code == 11000){
-            res.send({"status" : "error", "message" :"the code of house existed"})      
-        }else if(err.errors.code.message != null){
-            res.send({"status" : "error", "message" :err.errors.code.message})      
-
-        }else{
-            res.send({"status" : "error", "message" :"Error almacenando la informacion"})      
-        }
-    })
-});
-
-
-router.patch('/house/:id', (req, res) => {
-   
-    var id = req.params.id
-    
-    var updateHouse = {
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        size: req.body.size,
-        type: req.body.type,
-        zip_code: req.body.zip_code,
-        rooms: req.body.rooms,
-        bathrooms: req.body.bathrooms,
-        parking: req.body.parking,
-        price: req.body.price,
-        code: req.body.code,
-    }
-
-    houseSchema.findByIdAndUpdate(id, updateHouse, {new: true}).then((result) => {
-        //console.log(id)
-        res.send(result)
-    }).catch((error) => {
-        console.log(error)
-        res.send("Error actualizando el registro")
-    })
-})
-
-router.delete('/house/:id', (req, res) => {
-    
-    var id = req.params.id
-
-    //Puedo establecer cualquier parametro para eliminar
-  houseSchema.deleteOne({_id: id}).then(() => {
-        res.json({"status": "success", "message": "User deleted successfully"})
-    }).catch((error) => {
-        console.log(error)
-        res.json({"status": "failed", "message": "Error deleting user"})
-    })
+ router.get('/house/:code', async(req, res)=>{
+ // traer una casa por código específico
+var code = req.params.code
+ let house = await HouseSchema.findById(code);
+ res.json(house)
 
 })
 
-module.exports = router
+
+ router.post('/house',async (req, res)=> {
+ // Crear una Casa
+ console.log(req.body)
+ let house = HouseSchema({
+    address: req.body.address,
+     city: req.body.city,
+     state:req.body.state,
+     size: req.body.size,
+     type: req.body.type,
+     price:req.body.price,
+     code: req.body.code
+ })
+
+ house.save().then((result) =>{
+     res.send(result)
+ }).catch((err) => {
+      res.send(err.message)
+
+ })
+
+ })
+
+router.patch('/houses/:code',(req,res) => {
+  //actualiza la una casa
+   //cuando viene por la url del servicio web params
+   var code = req.params.code
+
+   //cuando viene por el body se usa el body
+ var updateHouse = {
+    address: req.body.address,
+    city: req.body.city,
+    state:req.body.state,
+    size: req.body.size,
+    type: req.body.type,
+    price:req.body.price,
+    code: req.body.price
+
+  }
+
+  HouseSchema.findByIdAndUpdate(code, updateHouse,{new:true}).then((result) =>{
+       res.send(result)
+   }).catch((error) =>{
+     console.log(error)
+     res.send("Error Actualizando los datos de la casa")
+
+  })
+
+ })
+
+
+ router.delete('/house/:code',(req, res)=> {
+
+   var code =  req.params.code
+  // para eliminar por cualquier parametro
+  
+  HouseSchema.deleteOne({code:code}).then(() =>{
+      res.json({"status": "success", "message": "House deleted successfully"})
+   }).catch(() =>{
+    console.log(error)
+    res.json({"status": "failed", "message": "Error deleting House"})
+
+  })
+
+ })
+
+
+ module.exports = router

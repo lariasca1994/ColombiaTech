@@ -1,25 +1,34 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
 
-const users = [
-    {
-        "_id": "65f4bba755f73d0b5b6d681b",
-        "id": 45451222,
-        "name": "Mario",
-        "lastname": "Sanchez",
-        "email": "mario@correo1'.com",
-        "password": "$2b$10$iHqI/AWVdPPVfPZJN5tOXu0QuWGC4VqjfAgKnrog1QjRMpdnj4Oci",        
-    }
+
+const users =[
+{
+"id":"212513121",
+"id":45326262,
+"name":"Mario",
+"lastname":"Perez",
+"email":"mario@correo.com",
+"password":"216161561561156"
+
+}
+
 ]
 
 export const userSlice = createSlice({
-    name: 'users',
-    initialState: users,
-    reducers: {
-        addUser: (state, action) => {
-            state.push(action.payload)
-        }
-    }
-})
 
-export const { addUser } = userSlice.actions
-export default userSlice.reducer
+   name: 'Users',
+   initialState:users,
+   reducers: {
+     addUser:(state, action) => {
+         state.push(action.payload)
+
+
+     }
+   
+
+   }
+
+
+})
+export const {addUser} = userSlice.actions
+export  default userSlice.reducer;

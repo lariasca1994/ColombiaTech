@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
-const UserSchema = require('../models/user')
+const UserSchema = require('../models/User')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET= process.env.JWT_SECRET || '';
+require('dotenv').config() // Obetenmos las variables de entorno
+
 class UserController {
 
     constructor(){
-        
+        this.jwtSecret  = process.env.JWT_SECRET || '';
+        this.validateToken = this.validateToken.bind(this)
     }
 
     async login(email, password){
@@ -18,37 +20,41 @@ class UserController {
 
         //Comparar la contraseña con la que tengo en base de datos
         const passwordMatch = await bcrypt.compare(password, user.password)
-
         if(!passwordMatch){
             return { "status": "error", "message": "Contraseña incorrecta"}
         }
 
-      const token = jwt.sign({ userId: user._id, 
-                            email: user.email,
-                             avatar: user.avatar,
-                            fullname: `${user.name} ${user.lastname}`}, JWT_SECRET, { expiresIn: '1h' })
+        const token = jwt.sign({ userId: user._id, 
+                                email: user.email, 
+                                avatar: user.avatar, 
+                                fullname: `${user.name} ${user.lastname}` 
+                }, this.jwtSecret, { expiresIn: '1h' })
+                
         user.password = null
-        return {"status": "success", "token": token, "user": user }//"token": token
+        return {"status": "success", "token": token, "user": user}
 
         } catch (error) {
             console.log(error)
             return { "status": "error", "message": "Error al iniciar sesion"}
         }
     }
-    validateToken (req, res, next){
-        const bearertoken= req.headers['authorization']
-        if(!bearertoken){
-            return res.status(401).json({"message":"token no existe"})
+
+    validateToken(req, res, next) {
+        const bearerToken = req.headers['authorization']
+        if(!bearerToken){
+            return res.status(401).json({ "message": "Token no existente"});
         }
-        const token = bearertoken.startsWith("Bearer ") ? bearertoken.slice(7): bearertoken;
-        jwt.verify(token,JWT_SECRET, (err,decoded)=>{
+
+        const token = bearerToken.startsWith("Bearer ") ? bearerToken.slice(7) : bearerToken;
+        jwt.verify(token, this.jwtSecret, (err, decoded) => {
             if(err){
-                return res.status(401).json({"message":"token invalido"});
+                return res.status(401).json({ "message": "Token invalido"}); 
             }
-            req.userId=decoded.userId
+            req.userId = decoded.userId;
             next();
-        })
+        })   
     }
+
 }
 
 module.exports = UserController

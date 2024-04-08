@@ -41,6 +41,16 @@ export default function Header() {
                 Crear casas
               </Link>
             </li>
+            <li>
+            <Link to="/chat" className="hover:text-blue-500">
+            Chat
+           </Link>
+           </li>
+           <li>
+            <Link to="/house" className="hover:text-blue-500">
+            Casas
+           </Link>
+           </li>
           </>
         )}
         <li>
@@ -48,14 +58,15 @@ export default function Header() {
             Crear Usuario
           </Link>
         </li>
+        
       </ul>
       {/* DropDown Usuario Logueado */}
       <div className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 px-5">
         {isAutheticated ? (
-          <>
+          <>          
             <div className="relative">
               <img
-                src={`http://localhost:3000/${user.avatar}`}
+                src={`https://nodejs-chi-seven.vercel.app/${user.avatar}`}
                 className="rounded-full h-10 w-10 cursor-pointer"
                 onClick={toggleMenu}
               />

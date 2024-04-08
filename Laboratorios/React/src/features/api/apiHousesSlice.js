@@ -1,12 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+
 
 export const apiHousesSlice = createApi({
     reducerPath: "housesApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3000', // Corrección: localhost en lugar de locahost
-        prepareHeaders: (headers, { getState }) => {
+        baseUrl: 'https://nodejs-chi-seven.vercel.app/',
+        prepareHeaders: (headers, {getState}) => {
             const token = getState().auth.token
-            if (token) {
+            if(token){
                 headers.set('Authorization', `Bearer ${token}`);
             }
             return headers;
@@ -18,7 +19,7 @@ export const apiHousesSlice = createApi({
             providesTags: ['Houses']
         }),
         getHouseByCode: builder.query({
-            query: (code) => '/house/' + code,
+            query: (_id) => '/house/' + _id,
             providesTags: ['House']
         }),
         createHouse: builder.mutation({
@@ -29,6 +30,19 @@ export const apiHousesSlice = createApi({
             }),
             invalidatesTags: ["Houses"] // Se ejecuta cuando hay un cambio en la BD
         }),
+
+        updateHouse:builder.mutation({
+        query:(house)  =>({
+            url:`/house/${house.code}`,
+            method: 'PATCH',
+            body: house
+
+        }),
+        invalidatesTags:["Houses","House"]
+
+        }),
+
+
         deleteHouse: builder.mutation({
             query: (code) => ({
                 url: `/house/${code}`,
@@ -36,21 +50,14 @@ export const apiHousesSlice = createApi({
             }),
             invalidatesTags: ["Houses"]
         }),
-        updateHouse: builder.mutation({
-            query: ({ code, updatedHouse }) => ({
-                url: `/house/${code}`,
-                method: 'PUT',
-                body: updatedHouse
-            }),
-            invalidatesTags: ['Houses']
-        }),
     })
 })
 
-export const { 
-    useGetHousesQuery,
-    useGetHouseByCodeQuery,
-    useCreateHouseMutation,
+/** Segun la nomenclatura de la libreria se usa use al principio 
+ * y Query o Mutation al final segun corresponda */
+export const { useGetHousesQuery, 
+    useGetHouseByCodeQuery, 
+    useCreateHouseMutation, 
+    useUpdateHouseMutation,
     useDeleteHouseMutation,
-    useUpdateHouseMutation
-} = apiHousesSlice;
+} = apiHousesSlice

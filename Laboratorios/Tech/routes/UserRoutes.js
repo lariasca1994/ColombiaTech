@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const UserSchema = require('../models/user.js')
-const UserController = require('../controllers/userController')
-const userController = new UserController();
+const UserSchema = require('../models/User');
+const MessageSchema = require('../models/Message');
+const UserController = require('../controllers/UserController'); //Importando el controllador
 const multer = require('multer');
-
+const userController = new UserController(); // creando una instancia de ese controlador
 
 
 
 router.get('/user', async (req, res) => {
+    //Traer todos los usuarios
     let users = await UserSchema.find(); 
     res.json(users)
 })
@@ -18,7 +19,6 @@ router.get('/user/:id', async (req, res) => {
     //Traer un usuario especifico pasando el ID
     var id = req.params.id
     let user = await UserSchema.findById(id); 
-    //console.log(id, user)
     res.json(user)
 
     //Traer un usuario pasandole el email
@@ -43,24 +43,23 @@ router.post('/user', async (req, res) => {
     }).catch((err) => {
         if(err.code == 11000){
             res.send({"status" : "error", "message" :"El correo ya fue registrado"})      
-        }else if(err.errors.email.message != null){
-            res.send({"status" : "error", "message" :err.errors.email.message})      
-
         }else{
-            res.send({"status" : "error", "message" :"Error almacenando la informacion"})      
+            res.send({"status" : "error", "message" :err.message})      
         }
     })
 })
 
-router.patch('/user/:id',userController.validateToken, async (req, res) => {
+
+
+router.patch('/user/:id', userController.validateToken, async (req, res) => {
     //Actualizar un usuario
     // Cuando viene por la url del servicio web params
-    let hashedPassword;
+    var id = req.params.id
 
-    if(req.body.password){
+    let hashedPassword;
+    if(req.body.password){ 
         hashedPassword = await bcrypt.hash(req.body.password, 10)
     }
-    var id = req.params.id
     
     // Cuando viene por el body se usa body
     var updateUser = {
@@ -68,7 +67,7 @@ router.patch('/user/:id',userController.validateToken, async (req, res) => {
         lastname: req.body.lastname,
         email: req.body.email,
         password: hashedPassword,
-        id: req.body.id,
+        id: req.body.id
     }
 
     UserSchema.findByIdAndUpdate(id, updateUser, {new: true}).then((result) => {
@@ -91,9 +90,24 @@ router.delete('/user/:id', userController.validateToken, (req, res) => {
         res.json({"status": "failed", "message": "Error deleting user"})
     })
 
-
+    //Ejemplo 2
+    // var name = req.params.name
+    // var email = req.params.email
+    // var query;
+    // if(email != null){
+    //     query = {name: name, email: email}
+    // }else{
+    //     query = {name: name}
+    // }
+    // //Puedo establecer cualquier parametro para eliminar
+    //     UserSchema.deleteOne(query).then(() => {
+    //         res.json({"status": "success", "message": "User deleted successfully"})
+    //     }).catch((error) => {
+    //         console.log(error)
+    //         res.json({"status": "failed", "message": "Error deleting user"})
+    //     })
 })
-// SERVICIO WEB DE LOGIN Y AUTENTIFICACION
+
 router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -107,42 +121,47 @@ router.post('/login', (req, res) => {
     })
 })
 
-//CONFIGURACION LIBRERIA MULTER
-const storage= multer.diskStorage({
-    destination: function(req, file, cb){
+//Configuracion de la libreria multer
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){        
         cb(null, 'uploads/')
     },
     filename: function(req, file, cb){
-        cb(null,Date.now()+ '-'+ file.originalname)
+        cb(null, Date.now() + '-' + file.originalname)
     }
 });
-const fileFilter= (req,file,cb)=>{
-    
+
+const fileFilter = (req, file, cb) => {    
     if(file.mimetype.startsWith('image/')){
-        cb(null,true)
+        cb(null, true)
     }else{
-        cb(new Error("El archivo no es una imagen"))
+        cb(new Error('El archivo no es una imagen'))
     }
 }
-const upload= multer({storage: storage, fileFilter: fileFilter})
 
-//SERVICIO WEB PARA SUBIR ARCHIVOS - --  
+const upload = multer({ storage: storage, fileFilter: fileFilter})
 
-router.post('/upload/:id/user', upload.single('file'),(req, res)=>{
+// Servicio web para el almacenamiento de archivos
+router.post('/upload/:id/user', upload.single('file'), (req, res) => {
     if(!req.file){
-        return req.status(400).send({"status": "error", "message": "no se proporciono ningun archivo"})
+        return res.status(400).send({ 'status': 'error', 'message': 'No se proporciono ningun archivo'})
     }
+
     var id = req.params.id
-    var updateUser= {
+
+    var updateUser = {
         avatar: req.file.path
     }
+
+    console.log(id)
+
     UserSchema.findByIdAndUpdate(id, updateUser, {new: true}).then((result) => {
-        res.send({"status": "success","message": "archivo subido correctamente"})
+        res.send({"status": "success", "message": "Archivo subido correctamente"})
     }).catch((error) => {
         console.log(error)
-        res.send("Error al subir el archivo")
+        res.send({"status": "success", "message" : "Error actualizando el registro"})
     })
-} )
 
+})
 
 module.exports = router
