@@ -1,6 +1,10 @@
 gamezmedia.net
 romsgames.net
 ategames.net
+
+Programa de Inventario de Productos
+Sistema de Reservas de un Hotel
+
 https://github.com/mariozan/telentoTech-Express.git
 https://github.com/mariozan/talentoTech-NestJS.git
 https://github.com/mariozan/talentoTech-react.git
@@ -12,21 +16,75 @@ https://app.egg.live/content/step/46lRqptfwbPDv1rJz5D95V
 
 https://youtube.com/playlist?list=PLViOgmEjbMSEQUIwgbUyTX-plqgWD-mZA&si=5ArtKRB9J50AFtql
 
-cognitiveclass.ai
-
 https://www.coursera.org/learn/python-statistics-financial-analysis
 https://www.coursera.org/learn/mathematical-thinking
 https://www.coursera.org/learn/python-for-applied-data-science-ai
 https://www.coursera.org/learn/cybersecurity-for-everyone
 https://www.coursera.org/learn/html-css-javascript-for-web-developers
+https://es.khanacademy.org/computing/computer-science
+https://es.khanacademy.org/computing/computer-programming
+https://es.khanacademy.org/computing/pixar
 
-① adventjs․dev
-② leetcode․com
-③ codewars․com
-④ exercism․org
-⑤ coderbyte․com
-⑥ codesignal․com
-⑦ hackerrank․com
+https://hubs.ly/Q02q8Cqy0
+https://hubs.ly/Q02q8MjW0
+https://hubs.ly/Q02q8yTT0
+https://hubs.ly/Q02q8NWW0
+https://hubs.ly/Q02q8JKn0
+https://hubs.ly/Q02q8BdG0
+https://hubs.ly/Q02q8NrY0
+https://hubs.ly/Q02q8JKp0
+https://hubs.ly/Q02q8JKq0
+https://hubs.ly/Q02q8MkW0
+https://hubs.ly/Q02q8yTV0
+https://hubs.ly/Q02q8MjX0
+https://hubs.ly/Q02q8Hml0
+https://hubs.ly/Q02q8MkX0
+https://hubs.ly/Q02q8NrZ0
+https://hubs.ly/Q02q8Cm00
+https://hubs.ly/Q02q8x8d0
+https://hubs.ly/Q02q8Cm10
+https://hubs.ly/Q02q8Cm10
+https://hubs.ly/Q02q8LJJ0
+https://hubs.ly/Q02q8MRD0
+
+https://drive.google.com/drive/folders/1NutVlzffKdfaNxa07evP86xq16z3cJEp
+https://drive.google.com/drive/folders/1NutVlzffKdfaNxa07evP86xq16z3cJEp
+https://drive.google.com/drive/folders/1gKDKhHmVDdh5EcRw0U-D7-T33K4_WYBi
+https://drive.google.com/drive/u/0/folders/1m5C0dJT4avirnS-wIIpE2gNV6FnhykJu
+https://mega.nz/folder/yA4hnITB#AAqLzrTa0GV5HCL0vUJkLQ
+https://mega.nz/folder/Ew8gTQiQ#uO_g47iHXmkkllLVfVlmgw
+https://mega.nz/folder/HI9WFAZC#95TLlzDJC8G5guvRpXDI7w
+https://drive.google.com/drive/folders/12RHf7GWHPjqJHBwxwOLegmV_CB8O0_bF
+https://drive.google.com/drive/folders/1RP131PcD_qU-lneKPcT6Gzrbu-avqtLQ
+https://mega.nz/folder/7shhgaYA#_K51l2982e9g4wccaIRAAw
+https://drive.google.com/drive/folders/19hi69t9Z-jV8Q8jQ9Bye5E7DXihQoX2i
+https://mega.nz/folder/ep8GRKQB#B87L5qwjDOvYLuAVMBDhDg
+https://mega.nz/file/dupmhQDQ#jweHYbfYurMCOsmPLxV8m-3jVPi_SUkB9vc5pU-2qRs
+https://mega.nz/folder/diYQ1ByY#iWGyUmJAP_Vp5eZwX0fk3A
+https://drive.google.com/drive/folders/18R2dnvwlaS8c43iui1BP1j-vq_DWHbr7
+https://drive.google.com/file/d/1WznEc3tIZIA45d1sAzXjNRe-mX1V853u/view
+https://drive.google.com/drive/folders/17urOXwl5nuS36ieUYikqsW4UfPZ_S2Kw
+https://drive.google.com/drive/folders/17urOXwl5nuS36ieUYikqsW4UfPZ_S2Kw
+https://drive.google.com/drive/folders/1YmN3md_IBJ5NGOiRAQ5ve8mjV1U8HsxG
+https://drive.google.com/drive/folders/1dMjYpXwK6ITesjc3HL81-3ELAhA9iEJN
+https://www.mediafire.com/file/0aty6bocwiod6po/Platzi_-_Curso_de_Prompt_Engineering_con_ChatGPT.rar/file
+https://mega.nz/folder/GXp3UYya#PePo2x-GhRliHRAjdP08uA
+https://drive.google.com/drive/folders/12hHAYRYangVF5pVrVfrJi3C-R_SYFsfz?fbclid=IwAR2rpZqYazIMomO6yjUc7R2oF67v2xp7d9NyxoHq_sHIeySbnYTIPXfjmus
+https://drive.google.com/drive/folders/1gKDKhHmVDdh5EcRw0U-D7-T33K4_WYBi
+https://drive.google.com/drive/folders/1d8RMk7J9TPtJoVuNH0SVPdqgk87Yf6J6?fbclid=IwAR3RYUwrn_USWK6vfAOUqVEJ7zef5a32TNzBcl7YrWeW0Qs4A7pPCUsolxI
+https://drive.google.com/drive/folders/1dfhaao4nqyTsEqHdwD3-HmwfCUpfUAkh
+https://drive.google.com/drive/folders/15vNDb1zHL5VcUz5cNVvstgGW4ghPJJQH
+https://drive.google.com/drive/folders/1TWT5iwTJgktq2RJc2Vx7v5M7eta-d4r6
+
+https://medium.com/@jonathanvargas_61788/ampl%C3%ADa-tus-habilidades-de-desarrollo-con-proyectos-pr%C3%A1cticos-y-c%C3%B3digo-base-listo-para-usar-9662ccc42f64
+
+adventjs․dev
+leetcode․com
+codewars․com
+exercism․org
+coderbyte․com
+codesignal․com
+hackerrank․com
 
 git init
 git add .
