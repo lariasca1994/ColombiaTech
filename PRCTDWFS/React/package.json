@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1"
+  },
+  "name": "react",
+  "version": "1.0.0",
+  "description": "Laboratorio React",
+  "main": "postcss.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lariasca1994/ColombiaTech.git"
+  },
+  "author": "Luis Arias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lariasca1994/ColombiaTech/issues"
+  },
+  "homepage": "https://github.com/lariasca1994/ColombiaTech#readme"
+}

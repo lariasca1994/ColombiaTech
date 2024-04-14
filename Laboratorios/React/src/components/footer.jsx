@@ -6,7 +6,7 @@ export default function Footer() {
           <div>
               <h1>Proyecto React</h1>
               <p>
-                  <h2>Desarrollado por Jonathan Garzon</h2>
+                  <h2>Proyecto Luis Felipe Arias</h2>
               </p>
           </div>
 

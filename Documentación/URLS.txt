@@ -2,8 +2,8 @@ gamezmedia.net
 romsgames.net
 ategames.net
 
-Programa de Inventario de Productos
-Sistema de Reservas de un Hotel
+lufearca7
+gloeTF1dWLdjRJUq	
 
 https://github.com/mariozan/telentoTech-Express.git
 https://github.com/mariozan/talentoTech-NestJS.git
@@ -15,6 +15,7 @@ https://pandamtl.com/series/the-protagonist-is-a-villain/
 https://app.egg.live/content/step/46lRqptfwbPDv1rJz5D95V
 
 https://youtube.com/playlist?list=PLViOgmEjbMSEQUIwgbUyTX-plqgWD-mZA&si=5ArtKRB9J50AFtql
+https://drive.google.com/drive/folders/135VVKSRK1NUydzlPtqHkjArTtjYSMJaF
 
 https://www.coursera.org/learn/python-statistics-financial-analysis
 https://www.coursera.org/learn/mathematical-thinking
@@ -47,14 +48,10 @@ https://hubs.ly/Q02q8Cm10
 https://hubs.ly/Q02q8LJJ0
 https://hubs.ly/Q02q8MRD0
 
-https://drive.google.com/drive/folders/1NutVlzffKdfaNxa07evP86xq16z3cJEp
-https://drive.google.com/drive/folders/1NutVlzffKdfaNxa07evP86xq16z3cJEp
-https://drive.google.com/drive/folders/1gKDKhHmVDdh5EcRw0U-D7-T33K4_WYBi
-https://drive.google.com/drive/u/0/folders/1m5C0dJT4avirnS-wIIpE2gNV6FnhykJu
 https://mega.nz/folder/yA4hnITB#AAqLzrTa0GV5HCL0vUJkLQ
 https://mega.nz/folder/Ew8gTQiQ#uO_g47iHXmkkllLVfVlmgw
 https://mega.nz/folder/HI9WFAZC#95TLlzDJC8G5guvRpXDI7w
-https://drive.google.com/drive/folders/12RHf7GWHPjqJHBwxwOLegmV_CB8O0_bF
+
 https://drive.google.com/drive/folders/1RP131PcD_qU-lneKPcT6Gzrbu-avqtLQ
 https://mega.nz/folder/7shhgaYA#_K51l2982e9g4wccaIRAAw
 https://drive.google.com/drive/folders/19hi69t9Z-jV8Q8jQ9Bye5E7DXihQoX2i
@@ -85,6 +82,7 @@ exercism․org
 coderbyte․com
 codesignal․com
 hackerrank․com
+roadmap.sh
 
 git init
 git add .
