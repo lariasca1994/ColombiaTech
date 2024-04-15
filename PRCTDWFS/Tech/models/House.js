@@ -1,5 +1,7 @@
 const mongoose = require('mongoose') 
-const fetch = require('node-fetch');//para el consumo de la API Externa
+import('node-fetch').then(({ default: fetch }) => {
+  // Aquí puedes usar la función `fetch`
+});//para el consumo de la API Externa
 // Creando el modelo de Casas
 const HouseSchema = new mongoose.Schema({
    address: {

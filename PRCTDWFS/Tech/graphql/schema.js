@@ -157,4 +157,4 @@ const schema = new GraphQLSchema({
 query: queryType
 })
 
-module.exports = schemasss
+module.exports = schema

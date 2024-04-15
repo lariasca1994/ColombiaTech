@@ -65,7 +65,7 @@ export const apiSlice = createApi({
     })    
 })
 
-/** Segun la nomenclatura de la libreria se usa use al principio 
+/** Segun la nomenclatura de la libreria se usa use principio 
  * y Query o Mutation al final segun corresponda */
 export const { useGetUsersQuery, 
                 useGetUserByIdQuery, 
